@@ -1,0 +1,160 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    {% if not leaves %}
+    <h2 style = "text-align: center; color: red ;">No Pending Requests</h2>
+    {% else %}
+    <h2 style = "text-align: center; color: red ;">Pending Requests</h2>
+    <div class="wrapper">
+
+        <div class="table">
+
+            <div class="row header">
+                <div class="cell">
+                    Student Name
+                </div>
+                <div class="cell">
+                    Room No (Hostel)
+                </div>
+                <div class="cell">
+                    Start Date
+                </div>
+                <div class="cell">
+                    End Date
+                </div>
+                <div class="cell">
+                    Reason
+                </div>
+                <div class="cell">
+                    Accept
+                </div>
+                <div class="cell">
+                    Reject
+                </div>
+            </div>
+            {% for leave in leaves %}
+                <div class="row">
+                    <div class="cell" data-title="Name">
+                        <a  href="{% url 'student_leaves' leave.student.id %}"> {{ leave.student.student_name }} </a>
+                    </div>
+                    <div class="cell" data-title="Name">
+                        {{ leave.student.room.no }} in {{ leave.student.room.hostel.name}}
+                    </div>
+                    <div class="cell" data-title="Date">
+                        {{ leave.start_date }}
+                    </div>
+                    <div class="cell" data-title="Date">
+                        {{ leave.end_date }}
+                    </div>
+                    <div class="cell" data-title="Name">
+                        {{ leave.reason }}
+                    </div>
+                    <div class="cell">
+                    <a class="btn btn-success" href="{% url 'leave_confirm' leave.id %}"> Grant  </a>
+                    </div>
+                    <div class="cell">
+                    <a class="btn btn-danger" href="{% url 'leave_reject' leave.id %}"> Reject  </a>
+                    </div>
+
+
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+    {% endif %}
+
+    <br><br>
+
+
+    {% if accepted %}
+    <h2 style = "text-align: center; color: blue ;" > Accepted Leave Requests</h2>
+
+    <div class="wrapper">
+        <div class="table">
+
+            <div class="row header">
+                <div class="cell">
+                    Student Name
+                </div>
+                <div class="cell">
+                    Enrollment No
+                </div>
+                <div class="cell">
+                    Course
+                </div>
+                <div class="cell">
+                    Start Date
+                </div>
+                <div class="cell">
+                    End Date
+                </div>
+                <div class="cell">
+                    Reason
+                </div>
+
+            </div>
+            {% for leave in accepted %}
+                <div class="row">
+                    <div class="cell">
+                        <a  href="{% url 'student_leaves' leave.student.id %}"> {{leave.student.student_name}} </a>
+                    </div>
+                    <div class="cell">
+                        {{leave.student.enrollment_no}}
+                    </div>
+                     <div class="cell">
+                        {{leave.student.course.code}}
+                    </div>
+
+                    <div class="cell">
+                        {{leave.start_date}}
+                    </div>
+                    <div class="cell">
+                        {{leave.end_date}}
+                    </div>
+                    <div class="cell">
+                        {{leave.reason}}
+                    </div>
+
+
+                 </div>
+            {% endfor %}
+
+
+
+        </div>
+
+    </div>
+    {% endif %}
+
+{% endblock content %}
+
+
+{% block more_links %}
+    <a href="{% url 'warden_profile' %}">
+        Profile
+    </a>
+    <a href="{% url 'empty_rooms' %}">
+        Empty Rooms
+    </a>
+    <a href="{% url 'present_leaves' %}">
+        Present Leave
+    </a>
+    <a href="{% url 'mess_rebate' %}">
+        Mess Rebate
+    </a>
+     <a href="{% url 'guest_requests' %}">
+        Guest Room Requests
+    </a>
+    <!--<a href="{% url 'warden_dues' %}">-->
+        <!--Dues-->
+    <!--</a>-->
+    <!--<a href="{% url 'warden_add_due' %}">-->
+        <!--Add Due-->
+    <!--</a>-->
+    <!--<a href="{% url 'warden_remove_due' %}">-->
+        <!--Remove Due-->
+    <!--</a>-->
+    <a href="{% url 'logout' %}">
+        Logout
+    </a>
+{% endblock more_links %}

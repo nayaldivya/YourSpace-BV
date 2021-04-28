@@ -1,0 +1,182 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+    <div class="wrapper">
+
+        <div class="table">
+
+            <div class="row header">
+                <div class="cell">
+                    Hostel
+                </div>
+                <div class="cell">
+                    Room No
+                </div>
+                <div class="cell">
+                    Type
+                </div>
+                <div class="cell">
+                    Status
+                </div>
+                <div class="cell">
+                    Student Name
+                </div>
+                <div class="cell">
+                    Smart Card ID
+                </div>
+                <div class="cell">
+                    Course
+                </div>
+                <div class="cell">
+                    Year of Study
+                </div>
+                <div class="cell">
+                    Maintenance
+                </div>
+
+            </div>
+            {% for room in rooms %}
+                <div class="row">
+                    <div class="cell" data-title="Number">
+                        {{ room.hostel.name }}
+                    </div>
+                    <div class="cell" data-title="Name">
+                        {{ room.no }}
+                    </div>
+                    <div class="cell" data-title="Type">
+                        {{ room.room_type }}
+                    </div>
+                    <div class="cell" style="{% if room.vacant %} color: green {% else %} color :blue {% endif %}" data-title="Status">
+                        {% if room.vacant %} vacant {% else %} occupied {% endif %}
+                    </div>
+                    <div class="cell">
+                        {% if room.vacant %}
+                            -
+                        {% else %}
+                            {{ room.student.student_name }}
+                        {% endif %}
+                    </div>
+                     <div class="cell">
+                        {% if room.vacant %}
+                            -
+                        {% else %}
+                            {{ room.student.smart_card_id }}
+                        {% endif %}
+                    </div>
+                    <div class="cell">
+                        {% if room.vacant %}
+                            -
+                        {% else %}
+                            {{ room.student.course.code }}
+                        {% endif %}
+                    </div>
+                    <div class="cell">
+                        {% if room.vacant %}
+                            -
+                        {% else %}
+                            {{ room.student.year_of_study }}
+                        {% endif %}
+                    </div>
+                    <div class="cell">
+                        {% if room.repair %}
+                             {{ room.repair }}
+                        {% else %}
+                            -
+                        {% endif %}
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+{% endblock content %}
+
+
+{% block more_links %}
+    <!--
+    <a href="{% url 'leave_admin' %}">
+        Leave requests
+    </a>
+    <a href="{% url 'present_leaves' %}">
+        Present Leave
+    </a>
+    <a href="{% url 'mess_rebate' %}">
+        Mess Rebate
+    </a>
+    <a href="{% url 'guest_requests' %}">
+        Guest Room Requests
+    </a>-->
+    <a href="{% url 'empty_rooms' %}">
+        Empty Rooms
+    </a>
+    <a href="{% url 'warden_dues' %}">
+        Dues
+    </a>
+    <a href="{% url 'warden_add_due' %}">
+        Add Due
+    </a>
+    <a href="{% url 'warden_remove_due' %}">
+        Remove Due
+    </a>
+    <a href="{% url 'logout' %}">
+        Logout
+    </a>
+{% endblock more_links %}
+
+
+
+    <!---->
+<!--<div class="box">-->
+    <!--<a class="button" href="#popup1">{{ room.student }}</a>-->
+    <!--</div>-->
+    <!---->
+    <!--<div id="popup1" class="overlay">-->
+    <!--<div class="popup">-->
+        <!--<h2>Student Details</h2>-->
+        <!--<a class="close" href="#">&times;</a>-->
+        <!--<div class="content">-->
+            <!--<div class="table">-->
+    <!---->
+                <!--<div class="row">-->
+                    <!--<div class="cell">-->
+                        <!--Student Name-->
+                    <!--</div>-->
+                    <!--<div class="cell">-->
+                        <!--{{ room.student.student_name }}-->
+                    <!--</div>-->
+                <!--</div>-->
+                <!--<div class="row">-->
+                    <!--<div class="cell">-->
+                        <!--Father's Name-->
+                    <!--</div>-->
+                    <!--<div class="cell">-->
+                        <!--{{ room.student.father_name }}-->
+                    <!--</div>-->
+                <!--</div>-->
+                <!--<div class="row">-->
+                    <!--<div class="cell">-->
+                        <!--Enrollment Number-->
+                    <!--</div>-->
+                    <!--<div class="cell">-->
+                        <!--{{ room.student.course }}-->
+                    <!--</div>-->
+                <!--</div>-->
+                <!--<div class="row">-->
+                    <!--<div class="cell">-->
+                        <!--Date of birth (yyyy-mm-dd)-->
+                    <!--</div>-->
+                    <!--<div class="cell">-->
+                        <!--{{ room.student.dob }}-->
+                    <!--</div>-->
+                <!--</div>-->
+                <!--<div class="row">-->
+                    <!--<div class="cell">-->
+                        <!--Gender-->
+                    <!--</div>-->
+                    <!--<div class="cell">-->
+                        <!--{{ room.student.gender }}-->
+                    <!--</div>-->
+                <!--</div>-->
+            <!--</div>-->
+        <!--</div>-->
+    <!--</div>-->

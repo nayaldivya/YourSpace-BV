@@ -1,0 +1,144 @@
+{% extends 'base.html' %}
+
+
+{% block content %}
+
+
+
+{% if bookings.count == 0 %}
+<center><h4 class = 's_book' style="padding: 30px;
+    text-align: center; color: red ;"> No Bookings Done!!</h4></center>
+{% else %}
+<center> <h3 class = 's_book' style="padding: 30px;
+    text-align: center; color: red ;"> ALL Successful Bookings of {{guest.first_name}}  {{guest.last_name}} ({{guest.user.username}})</h3></center>
+<!--<table class = 'test'>-->
+
+
+
+            <!--<tr>-->
+                <!--<th>-->
+                   <!--ID-->
+                <!--</th>-->
+                <!--<th>-->
+                    <!--Room No-->
+                <!--</th>-->
+                <!--<th>-->
+                    <!--CheckIn-->
+                <!--</th>-->
+                <!--<th>-->
+                    <!--CheckOut-->
+                <!--</th>-->
+            <!--</tr>-->
+        <!--{% for booking in bookings %}-->
+            <!--<tr>-->
+                <!--<td class="test">-->
+                   <!--{{booking.booking_id}}-->
+                <!--</td>-->
+                <!--<td class="test">-->
+                    <!--{{booking.room.no}}-->
+                <!--</td>-->
+                <!--<td class="test">-->
+                    <!--{{booking.checkIn}}-->
+                <!--</td>-->
+                <!--<td class="test">-->
+                    <!--{{booking.checkOut}}-->
+                <!--</td>-->
+
+
+
+               <!--<td> <a class="btn btn-danger" href="{% url 'guest:cancel' booking.booking_id %}"> Cancel Booking </a>-->
+               <!--</td>-->
+            <!--</tr>-->
+        <!--{% endfor %}-->
+
+
+<!--</table>-->
+
+<!--<br>-->
+
+
+ <div class="wrapper" style="
+    padding-top: 0px;">
+
+        <div class="table">
+
+            <div class="row header">
+                <div class="cell">
+                    ID
+                </div>
+                <div class="cell">
+                    Room No
+                </div>
+                <div class="cell">
+                    CheckIn
+                </div>
+                <div class="cell">
+                    CheckOut
+                </div>
+                <div class="cell">
+                    Status
+                </div>
+
+            </div>
+            {% for booking in bookings %}
+                <div class="row">
+                    <div class="cell" data-title="Number">
+                        {{forloop.counter}}
+                    </div>
+                    <div class="cell" data-title="Number">
+                        {{booking.room.no}}
+                    </div>
+                    <div class="cell" data-title="Date">
+                         {{booking.checkIn}}
+                    </div>
+                    <div class="cell" data-title="Date">
+                        {{booking.checkOut}}
+                    </div>
+                    <div class="cell" style="{% if booking.accept %} color: green {% elif booking.reject %} color:Red {% endif %}" data-title="status">
+
+                        {% if booking.accept %}
+                        Accepted
+                        {% elif booking.reject %}
+                        Rejected
+                        {% else %}
+                        Pending
+                        {% endif %}
+
+                    </div>
+
+
+
+                </div>
+            {% endfor %}
+        </div>
+
+    </div>
+ <br>
+{% endif %}
+
+{% endblock content %}
+
+
+
+
+{% block more_links %}
+      <a href="{% url 'leave_admin' %}">
+        Leave requests
+    </a>
+    <a href="{% url 'empty_rooms' %}">
+        Empty Rooms
+    </a>
+    <a href="{% url 'present_leaves' %}">
+        Present Leave
+    </a>
+    <a href="{% url 'mess_rebate' %}">
+        Mess Rebate
+    </a>
+    <a href="{% url 'guest_requests' %}">
+        Guest Room Requests
+    </a>
+    <a href="{% url 'logout' %}">
+        Logout
+    </a>
+{% endblock more_links %}
+

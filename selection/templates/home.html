@@ -1,0 +1,37 @@
+{% extends 'base.html' %}
+<!--<div class="hello">-->
+<!--{% block hello %}-->
+
+<!--<div class="jumbotron" style="height:auto;">-->
+  <!--<h1 class="display-4">Hello, world!</h1>-->
+<!--</div>-->
+<!--{% endblock hello %}-->
+
+<!--</div>-->
+
+
+{% block content %}
+
+<div class="wrap">
+    <a class="button-custom" href="{% url 'reg_form' %}">
+        Register
+    </a>
+    <a class="button-custom" href="{% url 'login' %}">
+        Login (Students)
+    </a>
+    <a class="button-custom" href="{% url 'warden_login' %}">
+        Login (Wardens)
+    </a>
+    <a class="button-custom" href="{% url 'hostel_all' %}">
+        Hostels
+    </a>
+  </div>
+
+{% endblock content %}
+
+
+{% block more_links %}
+    <!--<a href="{% url 'login' %}">Login</a>-->
+    <!--<a href="{% url 'reg_form' %}">Register</a>-->
+    <!--<a href="{% url 'guest:start' %}">Guest Room Booking</a>-->
+{% endblock more_links %}

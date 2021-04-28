@@ -1,0 +1,104 @@
+{% extends 'guest/base.html' %}
+
+{% block content %}
+
+    <div class="wrapper">
+        <div class="table">
+
+            <div class="row">
+                <div class="cell">
+                    First Name
+                </div>
+                <div class="cell">
+                    {{ res.guest.first_name }}
+                </div>
+            </div>
+            <div class="row">
+                <div class="cell">
+                    Last Name
+                </div>
+                <div class="cell">
+                    {{ res.guest.last_name}}
+                </div>
+            </div>
+            <div class="row">
+                <div class="cell">
+                    Phone no
+                </div>
+                <div class="cell">
+                    {{ res.guest.phone }}
+                </div>
+            </div>
+            <div class="row">
+                <div class="cell">
+                    E-Mail
+                </div>
+                <div class="cell">
+                    {{ res.guest.email }}
+                </div>
+            </div>
+            <div class="row">
+                <div class="cell">
+                    city
+                </div>
+                <div class="cell">
+                    {{ res.guest.city }}
+                </div>
+            </div>
+            <div class="row">
+                <div class="cell">
+                    Room
+                </div>
+                <div class="cell">
+                     {{ res.room.no }} in Guest House
+
+                </div>
+            </div>
+            <div class="row">
+                <div class="cell">
+                    Price (&#x20b9;)
+                </div>
+                <div class="cell">
+                     {{res.room.price}}
+                </div>
+            </div>
+            <div class="row">
+                <div class="cell">
+                    CheckIn
+                </div>
+                <div class="cell">
+                     {{ res.checkIn }}
+
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="cell">
+                    CheckOut
+                </div>
+                <div class="cell">
+                     {{ res.checkOut }}
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <div style=" margin: 0 auto;
+            padding: 40px;
+            max-width: 800px;text-align:center;">
+            <a class="btn btn-success" href="{% url 'guest:confirm' res.booking_id %}"> Confirm Booking </a>
+
+            <a class="btn btn-danger" href="{% url 'guest:cancel' res.booking_id %}"> Cancel Booking </a>
+
+            <!--<a class="btn btn-success" href="{% url 'guest:pdf' res.booking_id %}"> Generate PDF </a>-->
+    </div>
+
+
+{% endblock content %}
+
+
+{% block more_links %}
+   <a href="{% url 'guest:logout' %}">Logout</a>
+{% endblock more_links %}

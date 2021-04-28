@@ -1,0 +1,157 @@
+{% extends 'guest/base.html' %}
+
+   {% block design %}
+
+.s_book{
+
+    padding: 30px;
+    text-align: center; color: red ;
+
+
+}
+
+table.test td.test {
+    background-color: lime;
+    margin: 12px 12px 12px 12px;
+    padding: 12px 12px 12px 12px;
+}
+table.test {
+    border-collapse: separate;
+    border-spacing: 10px;
+    *border-collapse: expression('separate', cellSpacing = '10px');
+}
+
+    {% endblock design %}
+{% block content %}
+
+
+
+{% if bookings.count == 0 %}
+<center><h4 class = 's_book'> No Bookings Done!!</h4></center>
+{% else %}
+<center> <h3 class = 's_book'> ALL Successful Bookings of {{guest.first_name}}  {{guest.last_name}} ({{guest.user.username}})</h3></center>
+<!--<table class = 'test'>-->
+
+
+
+            <!--<tr>-->
+                <!--<th>-->
+                   <!--ID-->
+                <!--</th>-->
+                <!--<th>-->
+                    <!--Room No-->
+                <!--</th>-->
+                <!--<th>-->
+                    <!--CheckIn-->
+                <!--</th>-->
+                <!--<th>-->
+                    <!--CheckOut-->
+                <!--</th>-->
+            <!--</tr>-->
+        <!--{% for booking in bookings %}-->
+            <!--<tr>-->
+                <!--<td class="test">-->
+                   <!--{{booking.booking_id}}-->
+                <!--</td>-->
+                <!--<td class="test">-->
+                    <!--{{booking.room.no}}-->
+                <!--</td>-->
+                <!--<td class="test">-->
+                    <!--{{booking.checkIn}}-->
+                <!--</td>-->
+                <!--<td class="test">-->
+                    <!--{{booking.checkOut}}-->
+                <!--</td>-->
+
+
+
+               <!--<td> <a class="btn btn-danger" href="{% url 'guest:cancel' booking.booking_id %}"> Cancel Booking </a>-->
+               <!--</td>-->
+            <!--</tr>-->
+        <!--{% endfor %}-->
+
+
+<!--</table>-->
+
+<!--<br>-->
+
+
+ <div class="wrapper" style="
+    padding-top: 0px;">
+
+        <div class="table">
+
+            <div class="row header">
+                <div class="cell">
+                    ID
+                </div>
+                <div class="cell">
+                    Room No
+                </div>
+                <div class="cell">
+                    CheckIn
+                </div>
+                <div class="cell">
+                    CheckOut
+                </div>
+                <div class="cell">
+                    Status
+                </div>
+                <div class="cell">
+                    Cancel
+                </div>
+            </div>
+            {% for booking in bookings %}
+                <div class="row">
+                    <div class="cell" data-title="Number">
+                        {{forloop.counter}}
+                    </div>
+                    <div class="cell" data-title="Number">
+                        {{booking.room.no}}
+                    </div>
+                    <div class="cell" data-title="Date">
+                         {{booking.checkIn}}
+                    </div>
+                    <div class="cell" data-title="Date">
+                        {{booking.checkOut}}
+                    </div>
+                    <div class="cell" style="{% if booking.accept %} color: green {% elif booking.reject %} color:Red {% else %} color: blue {% endif %}"  data-title="status">
+
+                        {% if booking.accept %}
+                        Accepted
+                        {% elif booking.reject %}
+                        Rejected
+                        {% else %}
+                        Pending
+                        {% endif %}
+
+                    </div>
+
+                    <div class="cell">
+                        {% if booking.accept %}
+                         <a class="btn btn-danger" href="{% url 'guest:cancel' booking.booking_id %}"> Cancel Booking </a>
+                        {% elif booking.reject %}
+                        Already Rejected
+                        {% else %}
+                         <a class="btn btn-danger" href="{% url 'guest:cancel' booking.booking_id %}"> Cancel Booking </a>
+                        {% endif %}
+                    </div>
+
+                </div>
+            {% endfor %}
+        </div>
+
+    </div>
+ <br>
+{% endif %}
+
+{% endblock content %}
+
+
+
+
+{% block more_links %}
+    <a href="{% url 'guest:home' %}"> Book A Room! </a>
+    <a href="{% url 'guest:logout' %}">Logout</a>
+{% endblock more_links %}
+

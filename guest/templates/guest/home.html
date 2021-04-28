@@ -1,0 +1,27 @@
+{% extends 'guest/base.html' %}
+
+{% block content %}
+
+
+<div class="wrap">
+<form action="" method="post">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <input type="submit" class = "btn btn-primary" value="CHECK AVAILABILITY">
+</form>
+
+</div>
+
+{% endblock content %}
+
+
+
+
+{% block more_links %}
+    <a href="{% url 'guest:bookings' %}">My Bookings</a>
+    <a href="{% url 'guest:logout' %}">Logout</a>
+
+{% endblock more_links %}
+
+
+

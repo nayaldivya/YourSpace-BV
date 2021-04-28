@@ -1,0 +1,76 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+    <div class="wrapper">
+
+        {% for student in students %}
+            {% if not student.no_dues %}
+                <div class="table">
+
+                    <div class="row">
+                        <div class="cell">
+                            Student Name
+                        </div>
+                        <div class="cell">
+                            {{ student.student_name }}
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="cell">
+                            Smart Card ID
+                        </div>
+                        <div class="cell">
+                            {{ student.smart_card_id }}
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="cell">
+                            Course
+                        </div>
+                        <div class="cell">
+                            {{ student.course }}
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="cell">
+                            Year
+                        </div>
+                        <div class="cell">
+                            {{ student.year_of_study }}
+                        </div>
+                    </div>
+                </div>
+            {% endif %}
+        {% endfor %}
+
+        <a class="button-custom" href="{% url 'warden_add_due' %}">
+        Add a due
+    </a>
+    </div>
+{% endblock content %}
+
+
+{% block more_links %}
+    <a href="{% url 'warden_profile' %}">
+        Profile
+    </a>
+    <a href="{% url 'empty_rooms' %}">
+        Empty Rooms
+    </a>
+    <!--<a href="{% url 'warden_dues' %}">-->
+        <!--Dues-->
+    <!--</a>-->
+    <a href="{% url 'warden_add_due' %}">
+        Add Due
+    </a>
+    <a href="{% url 'warden_remove_due' %}">
+        Remove Due
+    </a>
+    <a href="{% url 'logout' %}">
+        Logout
+    </a>
+{% endblock more_links %}
