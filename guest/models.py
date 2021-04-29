@@ -9,7 +9,7 @@ from selection.models import User
 
 class Room(models.Model):
     # room_id = models.AutoField(primary_key=True)
-    room_choice = [('S', 'Single Occupancy'), ('D', 'Double Occupancy')]
+    room_choice = [('D', 'Double Occupancy'), ('T', 'Triple Occupancy'),('F', 'Four Occupancy')]
     no = models.CharField(validators=[MinLengthValidator(2)],max_length=5,unique=True)
     max_persons = models.IntegerField(default=2)
     room_type = models.CharField(choices=room_choice, max_length=1, default=None)

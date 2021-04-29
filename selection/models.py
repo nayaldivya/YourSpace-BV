@@ -35,7 +35,7 @@ class Student(models.Model):
         on_delete= models.SET_NULL,
         null=True)
     room_allotted = models.BooleanField(default=False)
-    no_dues = models.BooleanField(default=True)
+    no_dues = models.BooleanField(default=False)
 
     def __str__(self):
         return str(self.smart_card_id)
@@ -51,7 +51,7 @@ class Student(models.Model):
 
 
 class Room(models.Model):
-    room_choice = [('S', 'Single Occupancy'), ('D', 'Double Occupancy'), ('T', 'Triple vacancy'),('A', 'All Single, Double and Triple Occupancy')]
+    room_choice = [('D', 'Double Occupancy'), ('T', 'Triple Occupancy'), ('Q', 'Quadruple vacancy'),('A', 'All Double, Quadruple and Triple Occupancy')]
     no = models.CharField(max_length=5)
     name = models.CharField(max_length=10)
     room_type = models.CharField(choices=room_choice, max_length=1, default=None)
@@ -89,9 +89,9 @@ class Hostel(models.Model):
 
 
 class Course(models.Model):
-    # if a student has enrollment number iit2017001 then the course code is iit2017
+
     code = models.CharField(max_length=100, default=None)
-    room_choice = [('S', 'Single Occupancy'), ('D', 'Double Occupancy'), ('T', 'Triple vacancy'),('A', 'All Single, Double and Triple Occupancy')]
+    room_choice = [('D', 'Double Occupancy'), ('T', 'Triple Occupancy'), ('Q', 'Quadruple vacancy'),('A', 'All Double, Quadruple and Triple Occupancy')]
     room_type = models.CharField(choices=room_choice, max_length=1, default='A')
 
     def __str__(self):
