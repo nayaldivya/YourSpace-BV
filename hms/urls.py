@@ -12,6 +12,8 @@ urlpatterns = [
     #path('', views.start, name='start'),
     path('', views.home, name='register'),
     path('reg_form/', views.register, name='reg_form'),
+    url(r'^activate/(?P<uidb64>[0-9A-Za-z_\-]+)/(?P<token>[0-9A-Za-z]{1,13}-[0-9A-Za-z]{1,20})/$',
+        views.activate, name='activate'),
     path('login/', views.user_login, name='login'),
     path('student_profile/', views.student_profile, name='student_profile'),
     path('warden_login/', views.warden_login, name='warden_login'),
