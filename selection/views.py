@@ -10,6 +10,12 @@ from django.contrib.auth.decorators import login_required
 import datetime,calendar
 from guest.models  import Room as Guest_Room,Reservation,Guest
 from django.core.exceptions import ObjectDoesNotExist
+from django.contrib.sites.shortcuts import get_current_site
+from django.utils.encoding import force_bytes, force_text
+from django.utils.http import urlsafe_base64_encode, urlsafe_base64_decode
+from django.template.loader import render_to_string
+from .tokens import account_activation_token
+from django.core.mail import EmailMessage
 
 
 def home(request):
@@ -23,45 +29,49 @@ def start(request):
 def register(request):
     if request.method == 'POST':
         form = UserForm(request.POST)
-        # error1, error2 = False, False
         print(form.is_valid())
         if form.is_valid():
-            new_user = form.save(commit=False)
-            new_user.save()
-            Student.objects.create(user=new_user)
+            user = form.save(commit=False)
+            user.is_active = False
+            user.save()
+            Student.objects.create(user=user)
             cd = form.cleaned_data
             print(str(cd))
-            user = authenticate(
-                request,
-                username=cd['username'],
-                password=cd['password1'])
-            if user is not None:
-                if user.is_active:
-
-                    login(request, user)
-                    return redirect('login/edit/')
-                else:
-
-                    return HttpResponse('Disabled account')
-            else:
-
-                return HttpResponse('Invalid Login')
+            current_site = get_current_site(request)
+            mail_subject = 'Activate your HMS account.'
+            message = render_to_string('acc_active_email.html', {
+                'user': user,
+                'domain': current_site.domain,
+                'uid': urlsafe_base64_encode(force_bytes(user.pk)).decode(),
+                'token': account_activation_token.make_token(user),
+            })
+            to_email = form.cleaned_data.get('email')
+            email = EmailMessage(
+                mail_subject, message, to=[to_email]
+            )
+            email.send()
+            return HttpResponse('Please confirm your email address to complete the registration')
         else:
-            form = UserForm()
-            args = {'form': form}
-            return render(request, 'reg_form.html', args)
-        # elif len(form.data['password1']) <= 8 or len(form.data['password2']) <= 8:
-        #     if len(form.data['password1']) <= 8:
-        #         error1 = True
-        #     if len(form.data['password2']) <= 8:
-        #         error2 = True
-        #     return render(request, 'reg_form.html', {'form': form, 'error1': error1, 'error2': error2})
-
+            return render(request, 'reg_form.html', {'form': form})
     else:
-
         form = UserForm()
-        args = {'form': form}
-        return render(request, 'reg_form.html', args)
+        return render(request, 'reg_form.html', {'form': form})
+
+def activate(request, uidb64, token):
+    try:
+        uid = force_text(urlsafe_base64_decode(uidb64))
+        user = User.objects.get(pk=uid)
+    except(TypeError, ValueError, OverflowError, User.DoesNotExist):
+        user = None
+    if user is not None and account_activation_token.check_token(user, token):
+        user.is_active = True
+        user.save()
+        login(request, user)
+        # return redirect('home')
+        return render(request, 'email_confirm.html')
+    else:
+        return HttpResponse('Activation link is invalid!')
+
 
 
 def user_login(request):

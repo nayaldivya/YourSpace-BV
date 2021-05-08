@@ -8,10 +8,10 @@ YEARS= [x for x in range(2018,2020)]
 
 class UserForm(UserCreationForm):
     password1 = forms.CharField(min_length=8, max_length=30, widget=forms.PasswordInput(render_value=False))
-
+    email = forms.EmailField(max_length=200, help_text='Required')
     class Meta:
         model = User
-        fields = ['username', 'password1', 'password2']
+        fields = ['username', 'email', 'password1', 'password2']
         help_texts = {
             'username': 'same as your smart card id',
         }
@@ -70,6 +70,7 @@ class LeaveForm(forms.ModelForm):
             'start_date',
             'end_date',
             'reason']
+
 class RepairForm(forms.ModelForm):
     class Meta:
         model = Room
