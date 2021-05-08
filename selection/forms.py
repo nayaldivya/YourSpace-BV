@@ -9,6 +9,11 @@ YEARS= [x for x in range(2018,2020)]
 class UserForm(UserCreationForm):
     password1 = forms.CharField(min_length=8, max_length=30, widget=forms.PasswordInput(render_value=False))
     email = forms.EmailField(max_length=200, help_text='Required')
+    def clean_email(self):
+        data = self.cleaned_data['email']
+        if "@banasthali.in" not in data:   # any check you need
+            raise forms.ValidationError("Must be a Banasthali Domain Address")
+        return data
     class Meta:
         model = User
         fields = ['username', 'email', 'password1', 'password2']
