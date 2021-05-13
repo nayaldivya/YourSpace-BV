@@ -4,72 +4,58 @@
 
     <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1">
 
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
+        integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"
+        integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy"
+        crossorigin="anonymous"></script>
 
-    <!--<style type="text/css">-->
-
-      <!---->
-
-    <!--</style>-->
-       {% load static %}
+    
+    {% load static %}
     <link rel="stylesheet" type="text/css" href="{% static 'selection/style.css' %}">
 </head>
 
 <body>
 
-<div class="nav">
-    <div class="nav-header">
-        <div class="nav-title">
-            <a href="{% url 'register' %}">Hostel Management - YOUR SPACE</a>
+    <div class="nav">
+        <div class="nav-header">
+            <div class="nav-title">
+                <a href="{% url 'register' %}">Hostel Management - YOUR SPACE</a>
+            </div>
         </div>
-    </div>
-    <!--<div class="nav-btn">-->
-        <!--<label for="nav-check">-->
-            <!--<span></span>-->
-            <!--<span></span>-->
-            <!--<span></span>-->
-        <!--</label>-->
-    <!--</div>-->
-    <!--<input type="checkbox" id="nav-check">-->
-    <!--<div class="nav-links">-->
-        <!--&lt;!&ndash;<a href="{% url 'BH5_Floor4' %}">Status</a>&ndash;&gt;-->
+       
+
+        <div class="nav-btn">
+            <label for="nav-check">
+                <span></span>
+                <span></span>
+                <span></span>
+            </label>
+        </div>
+        <input type="checkbox" id="nav-check">
+
+        
+        <div class="nav-links">
+            
+            {% block more_links %}
+            {% endblock more_links %}
 
 
-    <!--</div>-->
-
-    <div class="nav-btn">
-        <label for="nav-check">
-            <span></span>
-            <span></span>
-            <span></span>
-        </label>
-    </div>
-    <input type="checkbox" id="nav-check">
-
-<!--<div class="nav">-->
-<!--<div class="nav-header">-->
-    <div class="nav-links">
-        <!--<a href="{% url 'BH5_Floor4' %}">Status</a>-->
-
-        {% block more_links %}
-        {% endblock more_links %}
-
+        </div>
+        
 
     </div>
-<!--</div>-->
+   
+    <div>
+        {% block content %}
+        {% endblock content %}
 
-</div>
-<!--style="width:100%;height:100%"-->
-<div >
-    {% block content %}
-    {% endblock content %}
-
-</div>
-<div class="copyright" align="center" >
-    2021 © Banasthali Vidyapith
-  </div>
+    </div>
+    <div class="copyright" align="center">
+        2021 © Banasthali Vidyapith
+    </div>
 
 
 </body>
+
 </html>

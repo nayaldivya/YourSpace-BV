@@ -123,13 +123,3 @@ class Warden(models.Model):
         print('pppppppppppppppppppppppppppppppppppppppp')
 
         super(Warden, self).delete(*args, **kwargs)
-
-
-class Leave(models.Model):
-    student = models.ForeignKey('Student', on_delete=models.CASCADE)
-    start_date = models.DateField()
-    end_date = models.DateField()
-    reason = models.CharField(max_length=100,blank = False)
-    accept = models.BooleanField(default=False)
-    reject = models.BooleanField(default=False)
-    confirm_time = models.DateTimeField(auto_now_add=True)

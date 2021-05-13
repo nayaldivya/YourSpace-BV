@@ -75,8 +75,3 @@ class CourseAdmin(admin.ModelAdmin):
             element.delete()
 
     delete_selected.short_description = "Delete selected elements"
-
-
-@admin.register(Leave)
-class LeaveAdmin(admin.ModelAdmin):
-    list_display = ['student','start_date','end_date','reason','accept','reject','confirm_time']
