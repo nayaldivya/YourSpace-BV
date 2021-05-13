@@ -31,7 +31,7 @@
                     <div class="cell" data-title="Type">
                         {{ room.room_type }}
                     </div>
-                    <div class="cell" style="{% if room.vacant %} color: green {% else %} color:Red {% endif %}" data-title="Status">
+                    <div class="cell" style="{% if room.vacant %} color: green {% else %} color: Red {% endif %}" data-title="Status">
                         {% if room.vacant %} vacant {% else %} occupied {% endif %}
                     </div>
                 </div>
