@@ -82,9 +82,6 @@ def user_login(request):
                     return HttpResponse('Invalid Login')
                 if user.is_active:
                     login(request, user)
-                    # student = request.user.student
-                    # leaves = Leave.objects.filter(student=request.user.student)
-                    # return render(request, 'profile.html', {'student': student, 'leaves': leaves})
                     return redirect('../student_profile/')
                 else:
                     return HttpResponse('Disabled account')
@@ -150,7 +147,6 @@ def student_profile(request):
         if user.is_active:
             login(request, user)
             student = request.user.student
-            leaves = Leave.objects.filter(student=request.user.student)
             return render(request, 'profile.html', {'student': student, 'leaves': leaves})
         else:
             return HttpResponse('Disabled account')
