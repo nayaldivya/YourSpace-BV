@@ -10,7 +10,7 @@
         integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy"
         crossorigin="anonymous"></script>
 
-    
+
     {% load static %}
     <link rel="stylesheet" type="text/css" href="{% static 'selection/style.css' %}">
 </head>
@@ -23,7 +23,7 @@
                 <a href="{% url 'register' %}">Hostel Management - YOUR SPACE</a>
             </div>
         </div>
-       
+
 
         <div class="nav-btn">
             <label for="nav-check">
@@ -34,18 +34,18 @@
         </div>
         <input type="checkbox" id="nav-check">
 
-        
+
         <div class="nav-links">
-            
+
             {% block more_links %}
             {% endblock more_links %}
 
 
         </div>
-        
+
 
     </div>
-   
+
     <div>
         {% block content %}
         {% endblock content %}
