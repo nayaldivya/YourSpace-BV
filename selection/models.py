@@ -12,7 +12,6 @@ class Student(models.Model):
         default=None,
         null=True,
         on_delete=models.CASCADE)
-    year_choices = [('I','First'),('II', 'Second'), ('III', 'Third'), ('IV', 'Fourth')]
     student_name = models.CharField(max_length=200, null=True)
     father_name = models.CharField(max_length=200, null=True)
     smart_card_id = models.CharField(max_length=20, unique=True, null=True)
@@ -21,14 +20,15 @@ class Student(models.Model):
         null=True,
         default=None,
         on_delete=models.CASCADE)
+    year_of_study = models.ForeignKey(
+        'Year',
+        null=True,
+        default=None,
+        on_delete=models.CASCADE)
     dob = models.DateField(
         max_length=10,
         help_text="format : YYYY-MM-DD",
         null=True)
-    year_of_study = models.CharField(
-        choices=year_choices,
-        max_length=3,
-        default='I',null=True)
     room = models.OneToOneField(
         'Room',
         blank=True,
@@ -75,11 +75,7 @@ class Room(models.Model):
 
 class Hostel(models.Model):
     name = models.CharField(max_length=50)
-    year_choices = [('I','First'),('II', 'Second'), ('III', 'Third'), ('IV', 'Fourth')]
-    year_of_study = models.CharField(
-        choices=year_choices,
-        max_length=3,
-        default=None,null=True)
+    year_of_study = models.ManyToManyField('Year', default=None, blank=True)
     course = models.ManyToManyField('Course', default=None, blank=True)
     caretaker = models.CharField(max_length=100, blank=True)
 
@@ -94,6 +90,13 @@ class Course(models.Model):
     room_choice = [('D', 'Double Occupancy'), ('T', 'Triple Occupancy'), ('Q', 'Quadruple vacancy'),('A', 'All Double, Quadruple and Triple Occupancy')]
     room_type = models.CharField(choices=room_choice, max_length=1, default='A')
 
+    def __str__(self):
+        return self.code
+
+class Year(models.Model):
+
+    code = models.CharField(max_length=2, default=None)
+    name = models.CharField(max_length=20, default=None)
     def __str__(self):
         return self.code
 
