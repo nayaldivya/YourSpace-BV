@@ -147,7 +147,7 @@ def student_profile(request):
         if user.is_active:
             login(request, user)
             student = request.user.student
-            return render(request, 'profile.html', {'student': student, 'leaves': leaves})
+            return render(request, 'profile.html', {'student': student})
         else:
             return HttpResponse('Disabled account')
     else:
@@ -162,8 +162,7 @@ def edit(request):
         if form.is_valid():
             form.save()
             student = request.user.student
-            leaves = Leave.objects.filter(student=request.user.student)
-            return render(request, 'profile.html', {'student': student, 'leaves': leaves})
+            return render(request, 'profile.html', {'student': student})
         else:
             form = RegistrationForm()
             return render(request, 'edit.html', {'form': form})
@@ -208,8 +207,7 @@ def select(request):
             student  = form.save()
             print(student.room_id)
             student = request.user.student
-            leaves = Leave.objects.filter(student=request.user.student)
-            return render(request, 'profile.html', {'student': student, 'leaves': leaves})
+            return render(request, 'profile.html', {'student': student})
     else:
         if not request.user.student.no_dues:
             return HttpResponse('You have dues. Please contact your Hostel Caretaker or Warden')
