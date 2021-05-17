@@ -99,7 +99,7 @@ class Migration(migrations.Migration):
             ],
         ),
         migrations.CreateModel(
-            name='Year_of_study',
+            name='Year',
             fields=[
                 ('id', models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
                 ('code', models.CharField(default=None, max_length=10)),
@@ -109,11 +109,11 @@ class Migration(migrations.Migration):
         migrations.AddField(
             model_name='student',
             name='year_of_study',
-            field=models.ForeignKey(default=None, null=True, on_delete=django.db.models.deletion.CASCADE, to='selection.Year_of_study'),
+            field=models.ForeignKey(default=None, null=True, on_delete=django.db.models.deletion.CASCADE, to='selection.Year'),
         ),
         migrations.AddField(
             model_name='hostel',
             name='year_of_study',
-            field=models.ManyToManyField(blank=True, default=None, to='selection.Year_of_study'),
+            field=models.ManyToManyField(blank=True, default=None, to='selection.Year'),
         ),
     ]

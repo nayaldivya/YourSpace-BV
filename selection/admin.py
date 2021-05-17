@@ -60,7 +60,7 @@ class HostelAdmin(admin.ModelAdmin):
 class CourseAdmin(admin.ModelAdmin):
     list_display = ['code', 'room_type']
 
-@admin.register(Year_of_study)
+@admin.register(Year)
 class CourseAdmin(admin.ModelAdmin):
     list_display = ['code']
 

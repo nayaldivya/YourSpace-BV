@@ -21,7 +21,7 @@ class Student(models.Model):
         default=None,
         on_delete=models.CASCADE)
     year_of_study = models.ForeignKey(
-        'Year_of_study',
+        'Year',
         null=True,
         default=None,
         on_delete=models.CASCADE)
@@ -75,7 +75,7 @@ class Room(models.Model):
 
 class Hostel(models.Model):
     name = models.CharField(max_length=50)
-    year_of_study = models.ManyToManyField('Year_of_study', default=None, blank=True)
+    year_of_study = models.ManyToManyField('Year', default=None, blank=True)
     course = models.ManyToManyField('Course', default=None, blank=True)
     caretaker = models.CharField(max_length=100, blank=True)
 
@@ -94,7 +94,7 @@ class Course(models.Model):
     def __str__(self):
         return self.code
 
-class Year_of_study(models.Model):
+class Year(models.Model):
 
     code = models.CharField(max_length=10, default=None)
     name = models.CharField(max_length=20, default=None)
