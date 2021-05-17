@@ -87,7 +87,7 @@ class Hostel(models.Model):
 class Course(models.Model):
 
     code = models.CharField(max_length=100, default=None)
-    name = models.CharField(max_length=20, default=None)
+    name = models.CharField(max_length=100, default=None)
     room_choice = [('D', 'Double Occupancy'), ('T', 'Triple Occupancy'), ('Q', 'Quadruple vacancy'),('A', 'All Double, Quadruple and Triple Occupancy')]
     room_type = models.CharField(choices=room_choice, max_length=1, default='A')
 
@@ -96,7 +96,7 @@ class Course(models.Model):
 
 class Year_of_study(models.Model):
 
-    code = models.CharField(max_length=5, default=None)
+    code = models.CharField(max_length=10, default=None)
     name = models.CharField(max_length=20, default=None)
     def __str__(self):
         return self.code

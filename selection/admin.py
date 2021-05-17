@@ -49,11 +49,12 @@ class RoomAdmin(admin.ModelAdmin):
 
 @admin.register(Hostel)
 class HostelAdmin(admin.ModelAdmin):
-    list_display = ['name', 'get_year_of_study']
+    list_display = ['name', 'get_year_of_study', 'get_course']
 
     def get_year_of_study(self, obj):
-        return "\n".join([p.code for p in obj.year_of_study.all()])
-
+        return ",\n".join([p.code for p in obj.year_of_study.all()])
+    def get_course(self, obj):
+        return ",\n".join([p.code for p in obj.course.all()])
 
 @admin.register(Course)
 class CourseAdmin(admin.ModelAdmin):
